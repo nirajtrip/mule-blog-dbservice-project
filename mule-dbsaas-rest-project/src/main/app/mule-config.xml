@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="EE-3.5.1"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/current/mule-jersey.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+    <http:connector name="HTTP_HTTPS" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" 
+				receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" 
+				socketSoLinger="0" doc:name="httpConnctor"/>
+				
+	<spring:beans>
+		<spring:bean id="employeesResource" name="employeesResource" class="com.appnovation.rest.resource.EmployeesResource" />    			
+    	<spring:bean id="employeesDao" name="employeesDao" class="com.appnovation.rest.dao.EmployeesDao" />    	
+	</spring:beans>				
+	
+	<flow name="restDbservice-mainFlow" doc:name="restDbservice-mainFlow">
+	
+		<http:inbound-endpoint address="http://localhost:8081/api" 
+						responseTimeout="9000"
+						exchange-pattern="request-response" 
+						doc:name="HTTP"
+						connector-ref="HTTP_HTTPS">
+		</http:inbound-endpoint>		
+		<jersey:resources doc:name="JerseyComponent">
+		  <component>
+		  	<spring-object bean="employeesResource" />
+		  </component>
+		</jersey:resources>
+		<object-to-string-transformer mimeType="application/json" doc:name="transform-object-to-JsonString"/>        
+	</flow>					
+</mule>
