@@ -14,9 +14,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
 ">
 	
-    <description>This property-config file loads project related files having key definitions.</description>
-	<context:property-placeholder location="classpath:mule-dbsaas-rest-project.properties"/>
-
+    <context:property-placeholder location="classpath:api-project.properties"/>
     <spring:beans>
 	    <spring:import resource="classpath:spring/spring-config.xml"/>
     </spring:beans>
