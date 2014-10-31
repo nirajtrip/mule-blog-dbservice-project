@@ -37,12 +37,11 @@ public class EmployeesResource {
 	private EmployeesDao employeesDao;
 
 	/**
-	 * Gets employeesDao.
+	 * Getters/Setters employeesDao.
 	 */
 	public EmployeesDao getEmployeesDao() {
-        return employeesDao;
-  }
-	 
+        	return employeesDao;
+  	}
 	/**
 	 * Sets employeesDao.
 	 */
@@ -51,18 +50,18 @@ public class EmployeesResource {
 	}	
 	
 	@GET
-  @Path("/all")
+  	@Path("/all")
 	public List<Employees> findAll() {
 		return employeesDao.findAll();
 	}
-  /**
-    * Get Employee info details by Id
-    * 
-    * @param empId
-    *     employee Identifier
-    */	
+  	/**
+	  * Get Employee info details by Id
+    	  * 
+    	  * @param empId
+    	  *     employee Identifier
+    	  */	
 	@GET
-  @Path("{id}")
+  	@Path("{id}")
 	public Response findByEmployeeId(@PathParam("id") String id) {
 		LOGGER.info("EmployeesResource findByEmployeeId Id= " + id);
 		
@@ -74,48 +73,47 @@ public class EmployeesResource {
 			           		.build();
 		}else{
 			return Response.status(Status.NOT_FOUND)
-		        .entity("No record found for employeeId: " + id)
+		        .entity("No record match found for Id: " + id)
 		        .type(MediaType.APPLICATION_JSON)
 		        .build();
 		}
 	}		
 
-  /**
-    * Create Employee
-    * 
-    * @param Employees
-    *     employee 
-    */	
+  	/**
+    	  * Create Employee
+    	  * 
+    	  * @param Employees
+    	  *     employee 
+    	  */	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Employees createEmployees(Employees employees) {
 		employeesDao.createEmployees(employees);
 		return employees;
 	}		
-	
-  /**
-    * Update Employee
-    * 
-    * @param Employees
-    *     employee 
-    */		
+  	/**
+    	  * Update Employee
+    	  * 
+    	  * @param Employees
+    	  *     employee 
+    	  */		
 	@PUT
-  @Path("{id}")
+  	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Employees updateEmployees(@PathParam("id")String id, Employees employees) {
 		return employeesDao.updateEmployees(employees);
 	}		
-  /**
-    * Delete Employee
-    * 
-    * @param id
-    *     Employee Identifier
-    */
-  @Path("{id}")
-  @DELETE
+  	/**
+    	  * Delete Employee
+    	  * 
+    	  * @param id
+    	  *     Employee Identifier
+    	  */
+  	@Path("{id}")
+  	@DELETE
 	public Response deleteEmployees(@PathParam("id") String id) {	
 		    	
-    Employees result = employeesDao.findByEmployeeId(id);
+    	    Employees result = employeesDao.findByEmployeeId(id);
 		if (result!=null) {
 			if (employeesDao.deleteByEmployeeId(id)){
 				return Response.status(Status.OK)
@@ -125,8 +123,8 @@ public class EmployeesResource {
 			}
 		}
 		return Response.status(Status.NOT_FOUND)
-				        .entity("Error during delete operation.")
-				        .type(MediaType.APPLICATION_JSON)
-				        .build();
-    }
+				.entity("DELETE operation failed!")
+				.type(MediaType.APPLICATION_JSON)
+				.build();
+    	}
 }
