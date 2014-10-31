@@ -13,12 +13,12 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 
     <http:connector name="HTTP_HTTPS" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" 
-				receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" 
-				socketSoLinger="0" doc:name="httpConnctor"/>
+			receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" 
+			socketSoLinger="0" doc:name="httpConnctor"/>
 				
 	<spring:beans>
 		<spring:bean id="employeesResource" name="employeesResource" class="com.appnovation.rest.resource.EmployeesResource" />    			
-    	<spring:bean id="employeesDao" name="employeesDao" class="com.appnovation.rest.dao.EmployeesDao" />    	
+		<spring:bean id="employeesDao" name="employeesDao" class="com.appnovation.rest.dao.EmployeesDao" />    	
 	</spring:beans>				
 	
 	<flow name="restDbservice-mainFlow" doc:name="restDbservice-mainFlow">
