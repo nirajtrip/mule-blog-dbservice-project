@@ -4,11 +4,11 @@ mule-dbsaas-rest-project
 ## URLs for various HTTP Operations:
 
 ```console
-BASE_URL: http://localhost:8081/api
-<BASE_URL>/emp  POST
-<BASE_URL>/emp/<id>  GET
-<BASE_URL>/emp/<id>  PUT
-<BASE_URL>/emp/<id>  DEL
+Base_Url: http://localhost:8081/api
+insert POST <Base_Url>/emp  Creates a employee resource using the data included in the request.
+get GET <Base_Url>/emp/<id> Returns the specified employee resource.
+update PUT <Base_Url>/emp/<id>  Updates the specified employee resource.
+delete DELETE <Base_Url>/emp/<id>  Deletes the specified employee resource.
 ```
 
 ### GET - To retrieve Employee by Id
@@ -18,7 +18,7 @@ http://localhost:8081/api/emp/<empId>
 http://localhost:8081/api/emp/all
 
 
-### POST - To create Employee details
+### POST - To create Employee 
 
 http://localhost:8081/api/emp
 * HTTP Headers: Content-Type: application/json
@@ -34,11 +34,11 @@ http://localhost:8081/api/emp
 }
 ```
 
-### DELETE - To delete Employee details
+### DELETE - To delete Employee 
 
 http://localhost:8081/api/emp/<empId>
 
-### PUT- To update Employee details
+### PUT- To update Employee 
 
 http://localhost:8081/api/emp/<empId>
 * HTTP Headers: Content-Type: application/json
